@@ -1,0 +1,25 @@
+"""Manage stored calculation objects."""
+
+from calculator.calculation import Calculation
+
+
+class History:
+    """Store and manage calculations."""
+
+    def __init__(self) -> None:
+        self._calculations: list[Calculation] = []
+
+    def add(self, calculation: Calculation) -> None:
+        if not isinstance(calculation, Calculation):
+            raise TypeError("History accepts Calculation objects only.")
+
+        self._calculations.append(calculation)
+
+    def get_history(self) -> list[Calculation]:
+        return self._calculations.copy()
+
+    def remove(self, index: int) -> Calculation:
+        if index < 0 or index >= len(self._calculations):
+            raise IndexError("Calculation does not exist.")
+
+        return self._calculations.pop(index)
